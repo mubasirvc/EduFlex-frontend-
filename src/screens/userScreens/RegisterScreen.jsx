@@ -19,8 +19,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import validateForm from "../../validattion/formValidation.js";
 import FormHelperText from "@mui/material/FormHelperText";
 
-// const defaultTheme = createTheme();
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -89,7 +87,8 @@ const RegisterScreen = () => {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 14,
+            mb: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",

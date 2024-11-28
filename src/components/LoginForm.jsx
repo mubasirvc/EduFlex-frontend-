@@ -1,4 +1,3 @@
-
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,13 +9,11 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import {  React, useState } from "react";
-import { Link as RouterLink} from 'react-router-dom';
+import { React, useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import Loading from "./Loader";
-
-
-
-
+import { flexbox } from "@mui/system";
+import { ButtonGroup } from "@mui/material";
 
 const theme = createTheme({
   palette: {
@@ -26,16 +23,14 @@ const theme = createTheme({
   },
 });
 
-
-
-const LoginForm = ({onSubmitHandler, isLoading, title}) => {
-
-  const [email, setEmail] = useState ('')
-  const [password, setPassword] = useState('')
+const LoginForm = ({ onSubmitHandler, isLoading, title }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [activeButton, setActiveButton] = useState('student');
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" sx={{mb: 10}}>
         <CssBaseline />
         <Box
           sx={{
@@ -45,17 +40,43 @@ const LoginForm = ({onSubmitHandler, isLoading, title}) => {
             alignItems: "center",
           }}
         >
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 3, mb: 2 }}>
+            <ButtonGroup>
+              <Button
+                component={RouterLink}
+                to="/tutor/login"
+                type="button"
+                variant={activeButton === "tutor" ? "contained" : "outlined"}
+                onClick={() => setActiveButton("tutor")}
+                sx={{ p: 1.5 }}
+              >
+                Tutor Login
+              </Button>
+              <Button
+                component={RouterLink}
+                to="/login"
+                type="button"
+                variant={activeButton === "student" ? "contained" : "outlined"}
+                onClick={() => setActiveButton("student")}
+                sx={{ p: 1.5 }}
+              >
+                Student Login
+              </Button>
+            </ButtonGroup>
+          </Box>
           <Avatar sx={{ m: 1, bgcolor: "#5B8291" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-           {title} Sign in
+            {title} Sign in
           </Typography>
 
-          { isLoading && <Loading/>}
+          {isLoading && <Loading />}
           <Box
             component="form"
-            onSubmit={(e) => {onSubmitHandler(e, email, password)}}
+            onSubmit={(e) => {
+              onSubmitHandler(e, email, password);
+            }}
             noValidate
             sx={{ mt: 1 }}
           >
@@ -68,7 +89,7 @@ const LoginForm = ({onSubmitHandler, isLoading, title}) => {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -79,8 +100,7 @@ const LoginForm = ({onSubmitHandler, isLoading, title}) => {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={e => setPassword(e.target.value)}
-
+              onChange={(e) => setPassword(e.target.value)}
             />
             <Button
               type="submit"
@@ -111,7 +131,6 @@ const LoginForm = ({onSubmitHandler, isLoading, title}) => {
       </Container>
     </ThemeProvider>
   );
-}
+};
 
-
-export default  LoginForm
+export default LoginForm;
