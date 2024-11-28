@@ -1,90 +1,53 @@
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Container,
-  CssBaseline,
-  Grid,
-  Rating,
-  Typography,
-} from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import { LiaRupeeSignSolid } from "react-icons/lia";
 
 const CourseCard = ({ courseData }) => {
   return (
-    <>
-      <CssBaseline />
-      <main>
-        <CssBaseline />
+    <main className="py-8">
+      <div className="max-w-screen-xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {courseData?.slice(1).map((course) => (
+            <div
+              key={course._id}
+              className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col min-h-[350px]"
+            >
+              <img
+                src={course.thumbnail}
+                alt={course.title}
+                className="w-full object-cover"
+              />
 
-        <Container sx={{ py: 8 }} maxWidth="lg">
-          <Grid container spacing={4} mt={2}>
-            {courseData.length === 0 ? (
-              <Typography gutterBottom variant="h5" component="h2">
-                No Course available
-              </Typography>
-            ) : (
-              courseData.map((course) => (
-                <Grid item key={course._id} xs={12} sm={6} md={3}>
-                  <Card
-                    sx={{
-                      boxShadow: 2,
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
+              <div className="p-6 flex flex-col flex-grow">
+                <h2 className="text-md font-semibold text-gray-800 mb-2 font-manrope">
+                  {course.title}
+                </h2>
+
+                <p className="text-sm text-gray-700 leading-tight mb-4 max-h-9 overflow-hidden font-manrope">
+                  {course.description || "No description available"}
+                </p>
+                <div className="flex-col items-end">
+                  <div className="flex gap-2 items-center mt-3 justify-center">
+                    <p className="text-base">Price:</p>
+                    <p className="text-base mt-1">
+                      <LiaRupeeSignSolid />
+                    </p>
+                    <p className="text-lg">{course.price}</p>
+                    <s className="text-lg text-gray-500">2999</s>
+                  </div>
+                  <Link
+                    to={`/course_view/${course._id}`}
+                    className="text-blue-600 hover:underline border-2 px-3 py-1 mt-4 rounded-md inline-block"
                   >
-                    <CardMedia
-                      component="div"
-                      sx={{
-                        // 16:9
-                        pt: "56.25%",
-                      }}
-                      image={course.thumbnail}
-                    />
-                    <CardContent sx={{ flexGrow: 1, py: 1 }}>
-                      <Typography gutterBottom variant="title" component="h3">
-                        {course.title}
-                      </Typography>
-                      <Typography
-                        fontFamily={"-moz-initial"}
-                        variant="subtitle2"
-                        component={"h5"}
-                      >
-                        {course.description}
-                      </Typography>
-                      <Typography mt={1}>
-                        Price :<LiaRupeeSignSolid/>{course.price} <span>&nbsp;</span>
-                        <s>2999</s>
-                      </Typography>
-
-                      <Rating
-                        sx={{ mt: 1 }}
-                        size="small"
-                        precision={0.5}
-                        readOnly
-                        value={course.rating}
-                      ></Rating>
-                    </CardContent>
-                    <CardActions>
-                      <Link to={`/course_view/${course._id}`}>
-                        <Button size="small" variant="outlined" sx={{ mb: 1 }}>
-                          View
-                        </Button>
-                      </Link>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))
-            )}
-          </Grid>
-        </Container>
-      </main>
-    </>
+                    View Details
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </main>
   );
 };
 

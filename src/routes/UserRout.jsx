@@ -24,12 +24,14 @@ import CourseTutor from "../components/user/Course_tutor";
 import Chat from '../screens/chat'
 import Profile from '../components/tutor/Profile'
 import Page404 from '../screens/Page404'
+import Navbar from "../components/user/Navbar";
 
 const UserRoutes = () => {
   return (
     <>
     <ThemeProvider theme={theme}>
-      <Header />
+      <Navbar />
+      {/* <Header /> */}
       <Routes>
         <Route index={true} path="/" element={<HomeScreen />} />
         <Route path="/profile" element={<Profile />} />
