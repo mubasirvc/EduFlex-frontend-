@@ -1,10 +1,14 @@
 module.exports = {
   content: [
-    "./index.html",               // Include the Vite entry point
-    "./src/**/*.{js,jsx,ts,tsx}", // Include all React components
+    "./index.html",
+    "./src/**/*.{js,jsx,ts,tsx}", 
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Poppins", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };
