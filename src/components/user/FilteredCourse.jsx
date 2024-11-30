@@ -7,7 +7,6 @@ const CourseScreen = () => {
   const [courseData, setCourseData] = useState([]);
 
   const { id } = useParams();
-  console.log(id);
 
   useEffect(() => {
     const fetchCourseData = async () => {

@@ -1,60 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import {
-  Box,
-  Button,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Divider,
-  Grid,
-  Paper,
-  Rating,
-  Typography,
-} from "@mui/material";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Box, Paper, Rating } from "@mui/material";
 import { razorPay } from "../../services/razorPay";
 import { LiaRupeeSignSolid } from "react-icons/lia";
 import { useSelector } from "react-redux";
 import Lessons from "../../components/user/lessons";
 import { userApi, userApiToken } from "../../services/api";
 import CourseReview from "./CourseReview";
-import { styled } from '@mui/material/styles';
-
+import { styled } from "@mui/material/styles";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
-  width: '100%',
-  paddingTop: theme.spacing(1),
+  width: "100%",
   paddingBottom: theme.spacing(2),
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  marginTop: theme.spacing(5),
-  backgroundColor: '#e8ecec',
+  marginLeft: "auto",
+  marginRight: "auto",
+  paddingTop: theme.spacing(5),
+  backgroundColor: "#e8ecec",
   alignItems: "center",
-  textAlign: 'center'
+  textAlign: "center",
 }));
 
 const StyledBox = styled(Box)(({ theme }) => ({
-  width: '100%',
-  marginLeft: 'auto',
-  marginRight: 'auto',
+  width: "100%",
+  marginLeft: "auto",
+  marginRight: "auto",
 }));
 
 const CourseView = () => {
   const [course, setCourse] = useState({});
   const [enrolled, setEnrolled] = useState(false);
+  const [showLessons, setShowLessons] = useState(false);
+  const [showReviews, setShowReviews] = useState(false);
 
   const navigate = useNavigate();
 
   const { id } = useParams();
   const { userInfo } = useSelector((state) => state.auth);
   const userId = userInfo?._id;
-  const authToken = userInfo?.token;
 
   useEffect(() => {
     const getCourseData = async () => {
@@ -100,15 +83,12 @@ const CourseView = () => {
     console.log(res, "am razorpay responseeee");
     if (res) {
       try {
-        const res = await userApiToken.post(
-          "payment",
-          {
-            userId,
-            courseId: id,
-            paymentMode: "razorpay",
-            amount,
-          },
-        )
+        const res = await userApiToken.post("payment", {
+          userId,
+          courseId: id,
+          paymentMode: "razorpay",
+          amount,
+        });
         if (res) {
           navigate("/success");
         }
@@ -119,163 +99,140 @@ const CourseView = () => {
   };
 
   return (
-    // <StyledPaper>
-    //   <StyledBox>
-    //     <Grid container spacing={3}>
-    //       <Grid item xs={12} md={6}>
-    //         <Card>
-    //           <CardActionArea component={Link} to={`/course_view/${course._id}`}>
-    //             <CardMedia component="img" height="280" image={course.thumbnail} alt="Course Thumbnail" />
-    //             <CardContent>
-    //               <Typography component="h2" variant="h5">
-    //                 {course.title}
-    //               </Typography>
-    //               <Divider sx={{ marginBottom: 2 }} />
-    //               <Typography variant="subtitle2" color="text.secondary">
-    //                 {course.description}
-    //               </Typography>
-    //               <Typography mt={1} variant="subtitle2" paragraph>
-    //                 Just for Rs: <LiaRupeeSignSolid /> <strong>{course.price}</strong> <s>2999</s>
-    //               </Typography>
-    //               <Link to={`/filter_tutor/${course?.tutor?._id}`}>By: {course?.tutor?.firstName}</Link>
-    //               <Box mt={1}>
-    //                 <Rating precision={0.5} name="read-only" value={course.rating} readOnly />
-    //               </Box>
-    //               {enrolled ? (
-    //                 <Link to={`/watch/${course._id}`}>
-    //                   <Button variant="contained" sx={{ marginBottom: 2, marginTop: 2 }}>
-    //                     Watch now
-    //                   </Button>
-    //                 </Link>
-    //               ) : (
-    //                 <Button
-    //                   variant="contained"
-    //                   onClick={() => paymentHandler(course.price)}
-    //                   sx={{ marginTop: 2, marginBottom: 2 }}
-    //                 >
-    //                   Buy now
-    //                 </Button>
-    //               )}
-    //             </CardContent>
-    //           </CardActionArea>
-    //         </Card>
-    //       </Grid>
-    //       <Grid item xs={12} md={6}>
-    //         {/* ...Additional content */}
-    //         <Box sx={{ mt: 8 }}>
-    //       <Accordion sx={{ py: 2 }}>
-    //         <AccordionSummary
-    //           expandIcon={<ExpandMoreIcon />}
-    //           aria-controls="panel1a-content"
-    //           id="panel1a-header"
-    //         >
-    //           <Typography variant="title" component={"h2"}>
-    //             View all lossons details
-    //           </Typography>
-    //         </AccordionSummary>
-    //         <AccordionDetails>
-    //           <Lessons
-    //             courseId={course._id}
-    //             width={160}
-    //             height={130}
-    //             status={true}
-    //           />
-    //         </AccordionDetails>
-    //       </Accordion>
-    //       <Accordion sx={{ py: 2 }}>
-    //         <AccordionSummary
-    //           expandIcon={<ExpandMoreIcon />}
-    //           aria-controls="panel2a-content"
-    //           id="panel2a-header"
-    //         >
-    //           <Typography variant="title" component={"h2"}>
-    //             See Review and Ratinngs
-    //           </Typography>
-    //         </AccordionSummary>
-    //         <AccordionDetails>
-    //           <Divider />
-    //           <CourseReview id={id} />
-    //         </AccordionDetails>
-    //       </Accordion>
-    //     </Box>
-    //       </Grid>
-    //     </Grid>
-    //     {/* ...Rest of the content */}
-    //   </StyledBox>
-    // </StyledPaper>
-
-
     <StyledPaper>
-    <StyledBox>
-      <Grid container spacing={3} marginLeft={'auto'} marginRight={'auto'}>
-        <Grid item xs={12} md={12} >
-          <Card sx={{width: '70%',}}>
-            <CardActionArea component={Link} to={`/course_view/${course._id}`}>
-              <CardMedia component="img" height="300" image={course.thumbnail} alt="Course Thumbnail" />
-              <CardContent>
-                <Typography component="h2" variant="h5">
-                  {course.title}
-                </Typography>
-                <Divider sx={{ marginBottom: 2 }} />
-                <Typography variant="subtitle2" color="text.secondary">
-                  {course.description}
-                </Typography>
-                <Typography mt={1} variant="subtitle2" paragraph>
-                  Just for Rs: <LiaRupeeSignSolid /> <strong>{course.price}</strong> <s>2999</s>
-                </Typography>
-                <Link to={`/filter_tutor/${course?.tutor?._id}`}>By: {course?.tutor?.firstName}</Link>
-                <Box mt={1}>
-                  <Rating precision={0.5} name="read-only" value={course.rating} readOnly />
-                </Box>
+      <StyledBox>
+        <div class="max-w-screen-xl mx-auto p-5 pb-0 sm:pb-0 md:pb-0 sm:p-10 md:p-16">
+          <div className="rounded overflow-hidden flex flex-col max-w-4xl mx-auto">
+            <img
+              className="w-full"
+              src={course.thumbnail}
+              alt="Sunset in the mountains"
+            />
+            <div className="relative -mt-16 px-10 pt-5 pb-16 bg-white border-2 border-gray-300 m-10">
+              <a
+                href="#"
+                className="font-semibold text-lg hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2"
+              >
+                {course.title}
+              </a>
+              <p className="text-gray-500 text-sm">{course.description}</p>
+              <p className="mt-5 text-gray-600 text-xs">
+                By:
+                <a
+                  href={`/filter_tutor/${course?.tutor?._id}`}
+                  className="text-xs text-indigo-600 transition duration-500 ease-in-out"
+                >
+                  {course?.tutor?.firstName}
+                </a>{" "}
+              </p>
+              <div className="mt-1">
+                <p className="text-sm mt-1">
+                  Just for Rs:
+                  <LiaRupeeSignSolid className="inline-block" />
+                  <strong>{course.price}</strong> <s>2999</s>
+                </p>
+                <div className="mt-1">
+                  <Rating
+                    precision={0.5}
+                    name="read-only"
+                    value={course.rating}
+                    readOnly
+                  />
+                </div>
                 {enrolled ? (
                   <Link to={`/watch/${course._id}`}>
-                    <Button variant="contained" sx={{ marginBottom: 2, marginTop: 2 }}>
+                    <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 mt-2 mb-2">
                       Watch now
-                    </Button>
+                    </button>
                   </Link>
                 ) : (
-                  <Button
-                    variant="contained"
+                  <button
+                    className="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 mt-2 mb-2"
                     onClick={() => paymentHandler(course.price)}
-                    sx={{ marginTop: 2, marginBottom: 2 }}
                   >
                     Buy now
-                  </Button>
+                  </button>
                 )}
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </Grid>
-      </Grid>
-      <Box mt={8} width={'70%'} p={3}>
-        <Accordion sx={{ py: 2 }}>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-            <Typography variant="title" component="h2">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="mb-8 w-[85%] mx-auto p-3 bg-white">
+          <div className="border-b py-4">
+            <h2
+              className="text-lg font-semibold cursor-pointer flex items-center justify-between"
+              onClick={() => setShowLessons(!showLessons)}
+            >
               View all lesson details
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-          <Lessons
-                courseId={course._id}
-                width={160}
-                height={130}
-                status={true}
-              />
-          </AccordionDetails>
-        </Accordion>
-        <Accordion sx={{ py: 2 }}>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel2a-content" id="panel2a-header">
-            <Typography variant="title" component="h2">
+              <span
+                className={`transition-transform ${
+                  showLessons ? "rotate-180" : ""
+                }`}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </span>
+            </h2>
+            {showLessons && (
+              <div className="mt-4">
+                <Lessons
+                  courseId={course._id}
+                  width={160}
+                  height={130}
+                  status={true}
+                />
+              </div>
+            )}
+          </div>
+
+          <div className="border-b py-4">
+            <h2
+              className="text-lg font-semibold cursor-pointer flex items-center justify-between"
+              onClick={() => setShowReviews(!showReviews)}
+            >
               See Reviews and Ratings
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-          <CourseReview id={id} />
-          </AccordionDetails>
-        </Accordion>
-      </Box>
-    </StyledBox>
-  </StyledPaper>
+              <span
+                className={`transition-transform ${
+                  showReviews ? "rotate-180" : ""
+                }`}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </span>
+            </h2>
+            {showReviews && (
+              <div className="mt-4">
+                <CourseReview id={id} />
+              </div>
+            )}
+          </div>
+        </div>
+      </StyledBox>
+    </StyledPaper>
   );
 };
 
