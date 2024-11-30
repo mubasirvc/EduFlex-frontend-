@@ -74,7 +74,7 @@ export default function CategoryCard() {
           <Grid container spacing={4}>
             {categoryData.map((cat, i) => (
               <Grid item key={cat._id} xs={12} sm={6} md={4}>
-                <div className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-4 pt-36 max-w-sm mx-auto">
+                <div className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-4 pb-4 pt-36 max-w-sm mx-auto">
                   <img
                     src={cat.imageUrl}
                     alt={cat.name}

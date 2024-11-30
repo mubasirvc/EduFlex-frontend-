@@ -1,16 +1,6 @@
-import {
-  Button,
-  Container,
-  CssBaseline,
-  Toolbar,
-} from "@mui/material";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { ADMIN_URL } from "../../constants/adminConstans";
-import SearchBar from "../../components/SerachBar";
 import CourseCard from "../../components/user/CourseCard";
 import { admin, userApi } from "../../services/api";
-
 
 const CourseScreen = () => {
   const [courseData, setCourseData] = useState([]);
@@ -45,69 +35,72 @@ const CourseScreen = () => {
 
   const filterCourseByCat = async (id) => {
     try {
-      const res = await userApi.get(`/course/category?id=${id}`)
-      if(res){
+      const res = await userApi.get(`/course/category?id=${id}`);
+      if (res) {
         setCourseData(res.data);
       }
     } catch (error) {
       console.log(error);
     }
-    
   };
 
-  const filterBySerach =async (query) => {
+  const filterBySerach = async (query) => {
+    if (!query.trim()) return;
+
     try {
-      const res = await userApi.get(`search_course?query=${query}`)
-      if(res){
-        setCourseData(res.data)
+      const res = await userApi.get(`search_course?query=${query}`);
+      if (res) {
+        setCourseData(res.data);
       }
-    } catch (error) {  
-    }
+    } catch (error) {}
   };
 
   return (
     <>
-      <CssBaseline />
-      <main>
-        <CssBaseline />
-
-        <Container sx={{ py: 8 }} maxWidth="lg">
-          <Toolbar
-            component="nav"
-            variant="dense"
-            sx={{ justifyContent: "space-between", overflowX: "auto", mb: 3 }}
-          >
-            <Button
+      <main className="">
+        <div className="bg-gradient-to-b from-blue-600 via-blue-300 to-blue-100 pb-10 pt-20">
+          <div className="flex flex-wrap items-start justify-center p-5 py-10 ">
+            <button
+              className="relative px-3 py-1 m-2 rounded-md shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 hover:ring hover:ring-opacity-50 focus:ring-opacity-50 hover:ring-blue-600 text-gray-900 bg-gray-200"
               onClick={() => {
                 fetchCourseData();
               }}
-              color="inherit"
-              noWrap
-              variant="outlined"
-              sx={{ p: 1, m: 1, flexShrink: 0, borderRadius: 0 }}
             >
-              All Course
-            </Button>
-
+              <span className="text-sm">All courses</span>
+            </button>
             {catData.map((cat) => (
-              <Button
-                color="inherit"
-                noWrap
+              <button
                 key={cat._id}
-                variant="outlined`"
+                className="relative px-3 py-1 m-2 rounded-md shadow-sm sm:py-2 sm:text-base ring ring-transparent group md:px-4 hover:ring hover:ring-opacity-50 focus:ring-opacity-50 hover:ring-blue-600 text-gray-900 bg-gray-200"
                 onClick={() => {
                   filterCourseByCat(cat._id);
                 }}
-                sx={{ p: 1, flexShrink: 0, borderRadius: 0, m: 1, border: 1 }}
               >
-                {cat.name}
-              </Button>
+                <span className="text-sm">{cat.name}</span>
+              </button>
             ))}
-          </Toolbar>
+          </div>
+          <label
+            className="mx-auto mb-10  relative bg-white min-w-sm max-w-7xl flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300"
+            htmlFor="search-bar"
+          >
+            <input
+              id="search-bar"
+              placeholder="Search courses"
+              className="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white"
+              onChange={(e) => {
+                filterBySerach(e.target.value);
+              }}
+            />
+          </label>
+        </div>
+        {/* <SearchBar onSearchHandler={filterBySerach} /> */}
 
-          <SearchBar onSearchHandler={filterBySerach} />
-          <CourseCard courseData={courseData}/>
-        </Container>
+        {!courseData.length ? (
+          <p>No courses found...</p>
+        ) : (
+          <CourseCard courseData={courseData} />
+        )}
       </main>
     </>
   );

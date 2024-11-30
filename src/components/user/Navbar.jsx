@@ -6,7 +6,7 @@ import { logout } from "../../slices/userSlices/authSlice";
 import { useNavigate, Link } from "react-router-dom";
 
 import Button from "@mui/material/Button";
-import { Stack } from "@mui/material";
+import { Avatar, Stack } from "@mui/material";
 
 const Navbar = () => {
   const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState(false);
