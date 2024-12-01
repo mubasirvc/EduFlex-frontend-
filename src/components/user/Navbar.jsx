@@ -56,7 +56,7 @@ const Navbar = () => {
       aria-label="penguin ui menu"
     >
       <a href="/" className="text-2xl font-bold text-neutral-900">
-        EduFlex
+        eduFlex
       </a>
 
       {userInfo ? (
@@ -86,19 +86,19 @@ const Navbar = () => {
                     </div>
                   </li>
                   <li>
-                    <a href="/profile" className="dropdown-link">
+                    <a href="/profile" className="dropdown-link text-sm">
                       My Profile
                     </a>
                   </li>
                   <li>
-                    <a href="/my_courses" className="dropdown-link">
+                    <a href="/my_courses" className="dropdown-link text-sm">
                       My Courses
                     </a>
                   </li>
                   <li>
                     <button
                       onClick={logoutHandler}
-                      className="w-full text-left dropdown-link"
+                      className="w-full text-left dropdown-link text-sm"
                     >
                       Sign Out
                     </button>
