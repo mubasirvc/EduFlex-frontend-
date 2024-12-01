@@ -22,7 +22,11 @@ const CourseScreen = () => {
     fetchCourseData();
   }, []);
 
-  return <CourseCard courseData={courseData} />;
+  return (
+    <div className="pt-24">
+      <CourseCard courseData={courseData} />
+    </div>
+  );
 };
 
 export default CourseScreen;

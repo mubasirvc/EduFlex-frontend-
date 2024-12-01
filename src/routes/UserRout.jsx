@@ -31,7 +31,6 @@ const UserRoutes = () => {
     <>
     <ThemeProvider theme={theme}>
       <Navbar />
-      {/* <Header /> */}
       <Routes>
         <Route index={true} path="/" element={<HomeScreen />} />
         <Route path="/profile" element={<Profile />} />
