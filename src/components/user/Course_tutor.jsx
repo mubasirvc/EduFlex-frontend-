@@ -17,8 +17,8 @@ const CourseTutor = () => {
       try {
         const res = await tutorApi.get(`course?id=${id}`);
         if (res) {
-          setStudents(res.data.courseData[0].students.length)
-          setTutor(res.data.courseData[0].tutor)
+          setStudents(res.data.courseData[0].students.length);
+          setTutor(res.data.courseData[0].tutor);
           setCourseData(res.data.courseData);
         }
       } catch (error) {
@@ -30,23 +30,27 @@ const CourseTutor = () => {
   }, []);
 
   const subtitleStyle = {
-    fontSize: '18px',
-    color: '#666',
-    marginBottom: '8px',
-    textAlign: 'center'
+    fontSize: "18px",
+    color: "#666",
+    marginBottom: "8px",
+    textAlign: "center",
   };
 
   return (
     <>
-      <Profile 
+      <Profile
         user={true}
         course={courseData.length}
         students={students}
         tutor={tutor}
       />
-      
-      <Typography mt={5} variant="subtitle1" style={subtitleStyle}>Courses</Typography>
-      <Divider/>
+      <h2 className="flex flex-row flex-nowrap items-center my-14">
+        <span className="flex-grow block border-t border-black"></span>
+        <span className="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-black text-white">
+          My Courses
+        </span>
+        <span className="flex-grow block border-t border-black"></span>
+      </h2>
       <CourseCard courseData={courseData} />;
     </>
   );

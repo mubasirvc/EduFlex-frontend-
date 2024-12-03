@@ -2,24 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { USERS_URL } from "../../constants/usersConstants";
 import { useSelector } from "react-redux";
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Container,
-  CssBaseline,
-  Divider,
-  Grid,
-  Rating,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, CssBaseline, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { userApi, userApiToken } from "../../services/api";
 import AddReview from "../../components/user/AddReview";
 import { toast } from "react-toastify";
+import { LiaRupeeSignSolid } from "react-icons/lia";
 
 const MyCoursesScreen = () => {
   const [myCourse, setMyCourse] = useState([]);
@@ -28,15 +16,16 @@ const MyCoursesScreen = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
   const userId = userInfo._id;
-  console.log(userInfo, userId, 'user iddddddddddddddddddddddddddddddd');
   const authToken = userInfo?.token;
 
   const submitHandler = (rating, review, courseId) => {
     try {
-      const res = userApiToken.post(
-        "review",
-        { rating, review, userId, courseId },
-      );
+      const res = userApiToken.post("review", {
+        rating,
+        review,
+        userId,
+        courseId,
+      });
       if (res) {
         setUpdated(true);
         toast.success("Review submited successfully");
@@ -81,27 +70,16 @@ const MyCoursesScreen = () => {
   }, []);
 
   return (
-    <div>
+    <div className="bg-[#e9ebf0] py-5">
       <CssBaseline />
-      <Box
-        px={10}
-        height={120}
-        sx={{ backgroundColor: "#e9ebf0", color: "#000" }}
-      >
-        <Typography
-          fontFamily={"-moz-initial"}
-          fontWeight={700}
-          pt={9}
-          pl={4}
-          maxWidth={"lg"}
-          variant="h4"
-          ml={"auto"}
-          mr={"auto"}
-        >
-          My learning
-        </Typography>
-
-        <Divider sx={{ color: "#fff" }} />
+      <Box px={10} height={120}>
+        <h2 className="flex flex-row flex-nowrap items-center mt-24">
+          <span className="flex-grow block border-t border-black"></span>
+          <span className="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-black text-white">
+            My learning
+          </span>
+          <span className="flex-grow block border-t border-black"></span>
+        </h2>
       </Box>
 
       <Container sx={{ py: 1 }} maxWidth="lg">
@@ -109,69 +87,66 @@ const MyCoursesScreen = () => {
           {myCourse.length === 0 ? (
             <h1>No Courses found!</h1>
           ) : (
-            myCourse.map((course) => (
-              <Grid item key={course._id} xs={12} sm={6} md={3}>
-                <Card
-                  sx={{
-                    boxShadow: 2,
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <CardMedia
-                    component="div"
-                    sx={{
-                      pt: "56.25%",
-                    }}
-                    image={course.thumbnail}
-                  />
-                  <CardContent sx={{ flexGrow: 1, py: 1 }}>
-                    <Typography gutterBottom variant="title" component="h3">
-                      {course.title}
-                    </Typography>
-                    <Typography
-                      fontFamily={"-moz-initial"}
-                      variant="subtitle2"
-                      component={"h5"}
-                    >
-                      {course.description}
-                    </Typography>
-                    <Typography mt={1}>Price : {course.price}</Typography>
+            <div className="max-w-screen-xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                {myCourse.map((course) => (
+                  <div
+                    key={course._id}
+                    className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col min-h-[350px]"
+                  >
+                    <img
+                      src={course.thumbnail}
+                      alt={course.title}
+                      className="w-full object-cover"
+                    />
 
-                    <Rating
-                      sx={{ mt: 1 }}
-                      size="small"
-                      precision={0.5}
-                      readOnly
-                      value={course.rating}
-                    ></Rating>
-                  </CardContent>
-                  <CardActions>
-                    <Link to={`/watch/${course._id}`}>
-                      <Button
-                        sx={{ mb: 2, ml: 1 }}
-                        variant="outlined"
-                        size="small"
-                      >
-                        Play
-                      </Button>
-                    </Link>
-                    {review.includes(course._id) ? (
-                      ""
-                    ) : (
-                      <AddReview
-                        ratingVal={''}
-                        reviewVal={''}
-                        edit={false}
-                        courseId={course._id}
-                        submitHandler={submitHandler}
-                      />
-                    )}
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))
+                    <div className="p-6 flex flex-col flex-grow">
+                      <h2 className="text-md font-semibold text-gray-800 mb-2 font-manrope">
+                        {course.title}
+                      </h2>
+
+                      <p className="text-sm text-gray-700 leading-tight mb-4 max-h-9 overflow-hidden font-manrope">
+                        {course.description || "No description available"}
+                      </p>
+                      <div className="flex-col items-end">
+                        <div className="flex gap-2 items-center mt-3 justify-center">
+                          <p className="text-base">Price:</p>
+                          <div className="flex">
+                            <p className="text-base mt-1">
+                              <LiaRupeeSignSolid />
+                            </p>
+                            <p className="text-lg">{course.price}</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex mt-5 justify-center">
+                        <Link to={`/watch/${course._id}`}>
+                          <Button
+                            sx={{ mb: 2, ml: 1 }}
+                            variant="outlined"
+                            size="small"
+                          >
+                            Play
+                          </Button>
+                        </Link>
+                        {review.includes(course._id) ? (
+                          ""
+                        ) : (
+                          <AddReview
+                            ratingVal={""}
+                            reviewVal={""}
+                            edit={false}
+                            courseId={course._id}
+                            submitHandler={submitHandler}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           )}
         </Grid>
       </Container>

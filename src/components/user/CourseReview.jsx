@@ -1,7 +1,6 @@
 import {
   Avatar,
   Box,
-  Button,
   Divider,
   Rating,
   Typography,
@@ -51,7 +50,6 @@ const CourseReview = ({ id }) => {
 
 
   const deleteReview = async(id) => {
-    console.log(id, 'delete id');
     try {
       const res = await userApiToken.delete(`review?id=${id}`)
       if(res){

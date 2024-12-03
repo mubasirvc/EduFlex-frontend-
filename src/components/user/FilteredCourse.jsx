@@ -3,11 +3,10 @@ import { userApi } from "../../services/api";
 import CourseCard from "./CourseCard";
 import { useParams } from "react-router-dom";
 
-const CourseScreen = () => {
+const filteredCourse = () => {
   const [courseData, setCourseData] = useState([]);
 
-  const { id } = useParams();
-  console.log(id);
+  const { id, name } = useParams();
 
   useEffect(() => {
     const fetchCourseData = async () => {
@@ -22,8 +21,20 @@ const CourseScreen = () => {
     };
     fetchCourseData();
   }, []);
+console.log(courseData.length);
 
-  return <CourseCard courseData={courseData} />;
+  return (
+    <div className="pt-24">
+      <div className="max-w-7xl mx-auto text-center mt-12">
+        <h1 className="text-4xl font-bold text-gray-600 leading-tight mb-16 border-b-2 border-gray-300 pb-2">
+          {!courseData.length
+            ? `No ${name} Courses Available`
+            : `${name} Courses.`}
+        </h1>
+      </div>
+      <CourseCard courseData={courseData} />
+    </div>
+  );
 };
 
-export default CourseScreen;
+export default filteredCourse;
