@@ -88,7 +88,7 @@ export default function CategoryCard() {
                     {categoryDescriptions[i]}{" "}
                   </div>
                   <Link
-                    to={`/filtered/${cat._id}`}
+                    to={`/filtered/${cat._id}/${cat.name}`}
                     className="absolute inset-0"
                   />
                 </div>

@@ -7,7 +7,7 @@ const CourseCard = ({ courseData }) => {
     <main className="py-8">
       <div className="max-w-screen-xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {courseData?.slice(1).map((course) => (
+          {courseData?.map((course) => (
             <div
               key={course._id}
               className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col min-h-[350px]"

@@ -42,7 +42,7 @@ const UserRoutes = () => {
         <Route path="/course" element={<CourseScreen />} />
         <Route path="/my_courses" element={<MyCoursesScreen />} />
         <Route path="/course_view/:id" element={<CourseView />} />
-        <Route path="/filtered/:id" element={<FilteredCourse />} />
+        <Route path="/filtered/:id/:name" element={<FilteredCourse />} />
         <Route path="/filter_tutor/:id" element={<CourseTutor />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="" element={<PrivateRoute />}>

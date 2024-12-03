@@ -1,22 +1,10 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { Paper } from "@mui/material";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import { USERS_URL } from "../../constants/usersConstants";
 import CourseCard from "./CourseCard";
 import { userApi } from "../../services/api";
 
 const Hero = () => {
   const [courseData, setCourseData] = useState([]);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const loadCourse = async () => {
@@ -100,7 +88,7 @@ const Hero = () => {
             learning needs. Whether you're looking to enhance your professional
             skills or explore a new hobby, we have something for everyone.
           </p>
-          <CourseCard courseData={courseData} />
+          <CourseCard courseData={courseData?.slice(1)} />
         </div>
       </section>
     </section>
