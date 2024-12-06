@@ -39,20 +39,34 @@ This repository contains the frontend of the application, built with React.js, p
 ## **Screenshots**
 
 1. **Landing Page**  
-   *Showcasing featured courses and platform overview.*  
-   ![Landing Page](public/screenshots/ss)
+   Showcasing featured courses and platform overview. Explore the React Native course(Rs-499), which currently includes added video lessons. Thank you 😊! 
+   ![Landing Page](/public/screenshots/ss1.png)
+   ![Landing Page](/public/screenshots/ss2.png)
+   ![Landing Page](/public/screenshots/ss3.png)
+   ![Landing Page](/public/screenshots/ss4.png)
 
-2. **Admin Dashboard**  
-   *Manage users, courses, and approve tutor registrations.*  
-   ![Admin Dashboard](public/screenshots/admin_dashboard.png)
 
-3. **Tutor Course Management**  
-   *Upload and manage video lessons.*  
-   ![Tutor Panel](public/screenshots/tutor_panel.png)
+   *Tutor registration form.*  
+   ![Tutor registration form](/public/screenshots/ss5.png)
 
-4. **Course Player**  
+   *all course views.*  
+   ![Landing Page](/public/screenshots/ss6.png)
+   *single course views.*  
+   ![Landing Page](/public/screenshots/ss7.png)
+
+2. **Course Player**  
    *Interactive video player for end users.*  
-   ![Course Player](public/screenshots/course_player.png)
+   ![Course Player](/public/screenshots/ss8.png)
+   *comment section.*  
+   ![Course Player](/public/screenshots/ss9.png)
+
+
+3. **Admin dashboard**   
+   ![Course Player](/public/screenshots/ss11.png)
+
+3. **Tutor dashboard**   
+   ![Course Player](/public/screenshots/ss10.png)
+
 
 ---
 
@@ -85,6 +99,14 @@ This repository contains the frontend of the application, built with React.js, p
   
 
 ### **End User**
+- **Email**: `mubasirumbi@gmail.com`  
+- **Password**: `123456`  
+
+### **Admin**
+- **Email**: `admin@gmail.com`  
+- **Password**: `123456`  
+
+### **Tutor**
 - **Email**: `mubasirumbi@gmail.com`  
 - **Password**: `123456`  
 
