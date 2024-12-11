@@ -98,15 +98,7 @@ This repository contains the frontend of the application, built with React.js, p
 ## **Dummy Accounts**
   
 
-### **End User**
-- **Email**: `mubasirumbi@gmail.com`  
-- **Password**: `123456`  
-
-### **Admin**
-- **Email**: `admin@gmail.com`  
-- **Password**: `123456`  
-
-### **Tutor**
+### **User**
 - **Email**: `mubasirumbi@gmail.com`  
 - **Password**: `123456`  
 
