@@ -13,6 +13,7 @@ import {
 import { Link } from "react-router-dom";
 import { admin } from "../../services/api";
 import { styled } from "@mui/material/styles";
+import Loader from "../Loader";
 
 const cards = [1, 2, 3, 4, 5, 6];
 
@@ -72,28 +73,32 @@ export default function CategoryCard() {
         </div>
         <Container sx={{ py: 8 }} maxWidth="lg">
           <Grid container spacing={4}>
-            {categoryData.map((cat, i) => (
-              <Grid item key={cat._id} xs={12} sm={6} md={4}>
-                <div className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-4 pb-4 pt-36 max-w-sm mx-auto">
-                  <img
-                    src={cat.imageUrl}
-                    alt={cat.name}
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
-                  <h3 className="z-10 mt-3 text-3xl font-bold text-white">
-                    {cat.name}
-                  </h3>
-                  <div className="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">
-                    {categoryDescriptions[i]}{" "}
+            {categoryData.length === 0 ? (
+              <Loader />
+            ) : (
+              categoryData.map((cat, i) => (
+                <Grid item key={cat._id} xs={12} sm={6} md={4}>
+                  <div className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-4 pb-4 pt-36 max-w-sm mx-auto">
+                    <img
+                      src={cat.imageUrl}
+                      alt={cat.name}
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+                    <h3 className="z-10 mt-3 text-3xl font-bold text-white">
+                      {cat.name}
+                    </h3>
+                    <div className="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">
+                      {categoryDescriptions[i]}{" "}
+                    </div>
+                    <Link
+                      to={`/filtered/${cat._id}/${cat.name}`}
+                      className="absolute inset-0"
+                    />
                   </div>
-                  <Link
-                    to={`/filtered/${cat._id}/${cat.name}`}
-                    className="absolute inset-0"
-                  />
-                </div>
-              </Grid>
-            ))}
+                </Grid>
+              ))
+            )}
           </Grid>
         </Container>
       </section>

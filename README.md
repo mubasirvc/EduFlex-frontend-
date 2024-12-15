@@ -39,7 +39,7 @@ This repository contains the frontend of the application, built with React.js, p
 ## **Screenshots**
 
 1. **Landing Page**  
-   Showcasing featured courses and platform overview. Explore the React Native course(Rs-499), which currently includes added video lessons. Thank you 😊! 
+   *Showcasing featured courses and platform overview. Explore the React Native course(Rs-499), which currently includes added video lessons. Thank you 😊!*
    ![Landing Page](/public/screenshots/ss1.png)
    ![Landing Page](/public/screenshots/ss2.png)
    ![Landing Page](/public/screenshots/ss3.png)
@@ -102,13 +102,6 @@ This repository contains the frontend of the application, built with React.js, p
 - **Email**: `mubasirumbi@gmail.com`  
 - **Password**: `123456`  
 
-### **Admin**
-- **Email**: `admin@gmail.com`  
-- **Password**: `123456`  
-
-### **Tutor**
-- **Email**: `mubasirumbi@gmail.com`  
-- **Password**: `123456`  
 
 ---
 
