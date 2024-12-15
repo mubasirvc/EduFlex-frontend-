@@ -45,11 +45,11 @@ const TutorCard = () => {
       </div>
 
       <Container sx={{ py: 2 }} maxWidth="lg">
-        <div className="my-2 sm:my-4 grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4 p-6">
-          {tutor?.length === 0 ? (
-            <Loader />
-          ) : (
-            tutor?.map((tutor, i) => (
+        {tutor?.length === 0 ? (
+          <Loader />
+        ) : (
+          <div className="my-2 sm:my-4 grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4 p-6">
+            {tutor?.map((tutor, i) => (
               <div key={tutor._id} className="flex flex-col justify-center">
                 <div className="flex flex-col h-full shadow justify-between rounded-lg pb-8 p-2 xl:p-8 mt-3 bg-gray-50">
                   <div>
@@ -93,9 +93,9 @@ const TutorCard = () => {
                   </div>
                 </div>
               </div>
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </Container>
     </section>
   );

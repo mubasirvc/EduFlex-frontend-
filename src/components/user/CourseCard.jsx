@@ -7,11 +7,11 @@ const CourseCard = ({ courseData }) => {
   return (
     <main className="py-8">
       <div className="max-w-screen-xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {courseData?.length === 0 ? (
-            <Loader />
-          ) : (
-            courseData?.map((course) => (
+        {courseData?.length === 0 ? (
+          <Loader />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {courseData?.map((course) => (
               <div
                 key={course._id}
                 className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col min-h-[350px]"
@@ -48,9 +48,9 @@ const CourseCard = ({ courseData }) => {
                   </div>
                 </div>
               </div>
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );
