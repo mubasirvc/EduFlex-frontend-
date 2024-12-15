@@ -12,7 +12,6 @@ const HomeScreen = () => {
     <CategoryCard/>
     <TutorCard/>
     <Hero2/>
-    {/* <RegistrationForm/> */}
     </>
   ) ;
 };

@@ -1,29 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import {
-  CardActionArea,
-  Container,
-  CssBaseline,
-  Grid,
-  createTheme,
-} from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { admin } from "../../services/api";
-import { styled } from "@mui/material/styles";
 import Loader from "../Loader";
-
-const cards = [1, 2, 3, 4, 5, 6];
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#5B8291",
-    },
-  },
-});
 
 export default function CategoryCard() {
   const [categoryData, setCategoryData] = useState([]);
@@ -41,12 +20,6 @@ export default function CategoryCard() {
     };
     loadCategory();
   }, []);
-
-  const StyledCardContent = styled(CardContent)(({ theme }) => ({
-    textAlign: "center",
-    textDecoration: "none",
-    color: "#244D61",
-  }));
 
   const categoryDescriptions = [
     "Create mobile apps for iOS and Android.",

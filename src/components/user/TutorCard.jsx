@@ -1,7 +1,8 @@
-import { Box, Container, Divider, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { admin, adminApi } from "../../services/api";
+import { admin } from "../../services/api";
+import Loader from "../Loader";
 
 const TutorCard = () => {
   const [tutor, setTutor] = useState([]);
